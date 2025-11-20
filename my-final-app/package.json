@@ -1,0 +1,9 @@
+{
+  "name": "youtube-task-tracker-netlify-final",
+  "version": "1.0.0",
+  "description": "The complete working version for Netlify.",
+  "dependencies": {
+    "google-auth-library": "^9.2.0",
+    "googleapis": "^128.0.0"
+  }
+}
