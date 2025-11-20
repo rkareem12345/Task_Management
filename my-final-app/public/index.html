@@ -1,0 +1,359 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>Task Management System</title>\
+    <style>\
+        * \{ margin: 0; padding: 0; box-sizing: border-box; \}\
+        body \{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0e1a; min-height: 100vh; color: #333; position: relative; overflow-x: hidden; \}\
+        .tech-bg \{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -10; will-change: transform; \}\
+        .tech-bg::before \{ content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.08) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.06) 0%, transparent 50%); animation: floatingOrbs 25s ease-in-out infinite; will-change: transform; \}\
+        .tech-bg::after \{ content: ''; position: absolute; width: 100%; height: 100%; background: linear-gradient(45deg, transparent 48%, rgba(0, 191, 255, 0.02) 49%, rgba(0, 191, 255, 0.02) 51%, transparent 52%), linear-gradient(-45deg, transparent 48%, rgba(135, 206, 235, 0.02) 49%, rgba(135, 206, 235, 0.02) 51%, transparent 52%); background-size: 80px 80px; animation: techGrid 30s linear infinite; will-change: transform; \}\
+        .neural-network \{ position: absolute; width: 100%; height: 100%; background: radial-gradient(2px 2px at 25% 25%, #00ff88, transparent), radial-gradient(2px 2px at 75% 75%, #0099ff, transparent), radial-gradient(1px 1px at 50% 10%, #ff0080, transparent), radial-gradient(1px 1px at 10% 90%, #00ddff, transparent); background-size: 400px 400px, 350px 350px, 300px 300px, 450px 450px; animation: neuralPulse 20s ease-in-out infinite; will-change: transform; \}\
+        .data-streams \{ position: absolute; width: 100%; height: 100%; background: repeating-linear-gradient( 45deg, transparent, transparent 150px, rgba(0,255,255,0.01) 152px, rgba(0,255,255,0.01) 154px ), repeating-linear-gradient( -45deg, transparent, transparent 200px, rgba(255,0,150,0.01) 202px, rgba(255,0,150,0.01) 204px ); animation: dataFlow 40s linear infinite; will-change: transform; \}\
+        @keyframes floatingOrbs \{ 0%, 100% \{ transform: translate(0, 0) scale(1); \} 25% \{ transform: translate(30px, -50px) scale(1.1); \} 50% \{ transform: translate(-20px, -30px) scale(0.9); \} 75% \{ transform: translate(-40px, 20px) scale(1.05); \} \}\
+        @keyframes techGrid \{ 0% \{ transform: translate(0, 0); \} 100% \{ transform: translate(80px, 80px); \} \}\
+        @keyframes neuralPulse \{ 0%, 100% \{ transform: translate(0, 0) rotate(0deg); \} 25% \{ transform: translate(20px, -30px) rotate(90deg); \} 50% \{ transform: translate(-15px, -20px) rotate(180deg); \} 75% \{ transform: translate(-25px, 10px) rotate(270deg); \} \}\
+        @keyframes dataFlow \{ 0% \{ transform: translateX(0) translateY(0); \} 100% \{ transform: translateX(200px) translateY(-200px); \} \}\
+        .container \{ max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; \}\
+        .header \{ background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; \}\
+        .header:hover \{ transform: translateY(-2px); \}\
+        .user-info h2 \{ color: #4f46e5; margin-bottom: 5px; \}\
+        .user-meta \{ display: flex; gap: 20px; font-size: 14px; color: #666; \}\
+        .action-buttons \{ display: flex; gap: 10px; \}\
+        .btn \{ padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; position: relative; overflow: hidden; \}\
+        .btn:hover:not(:disabled) \{ transform: translateY(-2px); \}\
+        .btn-primary \{ background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); \}\
+        .btn-danger \{ background: linear-gradient(135deg, #ef4444, #dc2626); color: white; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); \}\
+        .btn:disabled \{ opacity: 0.6; cursor: not-allowed; \}\
+        .hidden \{ display: none !important; \}\
+        .loading-screen \{ background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; \}\
+        .loading-spinner-large \{ width: 48px; height: 48px; border: 4px solid #e2e8f0; border-top: 4px solid #4f46e5; border-radius: 50%; animation: spin 1s linear infinite; \}\
+        .content-grid \{ display: grid; grid-template-columns: 1fr 1fr 300px; gap: 20px; \}\
+        .card \{ background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-radius: 12px; padding: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); margin-bottom: 20px; \}\
+        .section-title \{ color: #4f46e5; margin-bottom: 20px; font-size: 18px; border-bottom: 1px solid #eee; padding-bottom: 10px; \}\
+        .timer-display \{ font-size: 48px; font-weight: bold; text-align: center; margin-bottom: 20px; font-family: 'Courier New', monospace; \}\
+        .timer-display.running \{ color: #ef4444; animation: pulse 1.5s infinite; \}\
+        @keyframes pulse \{ 0%, 100% \{ opacity: 1; \} 50% \{ opacity: 0.7; \} \}\
+        .task-stats \{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; \}\
+        .stat-item \{ text-align: center; padding: 15px; background: #f8fafc; border-radius: 8px; \}\
+        .stat-item h4 \{ font-size: 24px; color: #4f46e5; margin-bottom: 5px; \}\
+        .status-display \{ padding: 15px; border-radius: 8px; margin-top: 20px; font-weight: 500; display: none; \}\
+        .status-info \{ background: #e0f2fe; color: #0277bd; \}\
+        .status-success \{ background: #e8f5e8; color: #2e7d32; \}\
+        .status-error \{ background: #ffebee; color: #c62828; \}\
+        .form-group \{ margin-bottom: 20px; \}\
+        .form-group label \{ display: block; margin-bottom: 5px; font-weight: 600; \}\
+        .form-group input \{ width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 5px; \}\
+        .form-group input:focus \{ outline: none; border-color: #4f46e5; \}\
+        .form-group input:disabled \{ background: #f8fafc; cursor: not-allowed; \}\
+        .multi-select \{ position: relative; \}\
+        .multi-select-dropdown \{ display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 2px solid #e2e8f0; border-radius: 5px; max-height: 200px; overflow-y: auto; z-index: 1000; \}\
+        .multi-select-dropdown.show \{ display: block; \}\
+        .multi-select-option \{ padding: 10px; cursor: pointer; \}\
+        .multi-select-option:hover \{ background: #f1f5f9; \}\
+        .selected-tags \{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; \}\
+        .tag \{ background: #4f46e5; color: white; padding: 5px 10px; border-radius: 20px; font-size: 12px; display: flex; align-items: center; gap: 5px; \}\
+        .tag .remove \{ cursor: pointer; font-weight: bold; \}\
+        .report-content \{ max-height: 400px; overflow-y: auto; \}\
+        .loading, .error, .info-text \{ text-align: center; padding: 20px; \}\
+        .error \{ color: #ef4444; font-weight: 600; \}\
+        .report-item \{ border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #f8fafc; \}\
+        #videoPreview \{ width: 100%; aspect-ratio: 16 / 9; border: none; border-radius: 8px; \}\
+        .validation-message \{ color: #ef4444; font-size: 13px; margin-top: 8px; display: none; \}\
+        .validation-message.show \{ display: block; \}\
+        .required \{ color: #ef4444; \}\
+        @keyframes spin \{ to \{ transform: rotate(360deg); \} \}\
+        .scoreboard-container \{ display: flex; flex-direction: column; height: 600px; background: rgba(255, 255, 255, 0.95); border-radius: 12px; overflow: hidden; \}\
+        .scoreboard-header \{ background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; padding: 12px 15px; \}\
+        .scoreboard-list \{ height: 100%; overflow-y: auto; list-style: none; padding: 0; margin: 0; \}\
+        .score-item \{ display: flex; align-items: center; padding: 12px 15px; background: white; border-bottom: 1px solid #e2e8f0; \}\
+        .score-rank \{ width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; background-color: #e2e8f0; \}\
+        .score-rank.rank-1 \{ background: gold; \}\
+        .score-rank.rank-2 \{ background: silver; \}\
+        .score-rank.rank-3 \{ background: #cd7f32; \}\
+        .score-info \{ flex: 1; \}\
+        .score-user \{ font-weight: 600; \}\
+        .score-meta \{ font-size: 11px; color: #6b7280; \}\
+        .score-count \{ font-size: 20px; font-weight: bold; color: #4f46e5; \}\
+        .empty-scoreboard \{ text-align: center; padding: 40px; color: #6b7280; \}\
+        @media (max-width: 1200px) \{ .content-grid \{ grid-template-columns: 1fr; \} \}\
+    </style>\
+</head>\
+<body>\
+    <div class="tech-bg"><div class="neural-network"></div><div class="data-streams"></div></div>\
+    <div class="container">\
+        <div class="header">\
+            <div class="user-info"><h2>Task Management System</h2><div class="user-meta"><span id="userEmail">Loading...</span><span id="userRole">Loading...</span></div></div>\
+            <div class="action-buttons"><button class="btn btn-primary" id="startTimerBtn">\uc0\u9654  Start Task</button><button class="btn btn-danger" id="refreshAppBtn">\u8635  Refresh</button></div>\
+        </div>\
+        <div id="loadingScreen" class="loading-screen"><div class="loading-spinner-large"></div><p id="loadingMessage">Connecting to server...</p></div>\
+        <div class="main-content hidden" id="mainContent">\
+            <div class="content-grid">\
+                <div class="left-panel">\
+                    <div class="card">\
+                        <h3 class="section-title">Task Timer</h3>\
+                        <div class="timer-display" id="timerDisplay">00:00:00</div>\
+                        <div class="task-stats">\
+                            <div class="stat-item"><h4 id="todayCount">0</h4><p>Today's Tasks</p></div>\
+                            <div class="stat-item"><h4 id="currentDuration">00:00:00</h4><p>Current Duration</p></div>\
+                        </div>\
+                        <div id="statusDisplay" class="status-display"></div>\
+                    </div>\
+                    <div class="card">\
+                        <h3 class="section-title">Task Details</h3>\
+                        <form id="taskForm" onsubmit="event.preventDefault()">\
+                            <div class="form-group"><label for="youtubeLink">YouTube Link <span class="required">*</span></label><input type="url" id="youtubeLink" placeholder="https://www.youtube.com/watch?v=" required disabled></div>\
+                            <div class="form-group">\
+                                <label for="commentsInput">Comments <span class="required">*</span></label>\
+                                <div class="multi-select">\
+                                    <input type="text" id="commentsInput" placeholder="Search and select comments..." disabled>\
+                                    <div class="multi-select-dropdown" id="commentsDropdown"></div>\
+                                </div>\
+                                <div id="commentsValidation" class="validation-message">Please select at least one comment.</div>\
+                                <div class="selected-tags" id="selectedComments"></div>\
+                            </div>\
+                            <div class="form-group"><label for="screenshotLink">Screenshot Link (Optional)</label><input type="url" id="screenshotLink" placeholder="https://screenshot.example.com/..." disabled></div>\
+                            <div class="form-group"><label for="brandName">Brand Name <span class="required">*</span></label><input type="text" id="brandName" placeholder="Enter brand name" required disabled></div>\
+                            <div class="form-actions"><button type="submit" class="btn btn-primary" id="submitBtn" disabled>Submit Task</button><button type="button" class="btn btn-danger" id="resetFormBtn">Reset Form</button></div>\
+                        </form>\
+                    </div>\
+                </div>\
+                <div class="right-panel">\
+                    <div class="card hidden" id="videoPreviewCard"><h3 class="section-title">Video Preview</h3><iframe id="videoPreview" src="" title="YouTube video player" allowfullscreen></iframe></div>\
+                    <div class="card"><h3 class="section-title">Recent Reports</h3><div class="report-content" id="reportContent"><p class="info-text">Enter a YouTube link to see reports...</p></div></div>\
+                </div>\
+                <div class="scoreboard-panel">\
+                    <div class="scoreboard-container"><div class="scoreboard-header"><h3>\uc0\u55356 \u57286  Live Scoreboard</h3></div><div class="scoreboard-content"><ul class="scoreboard-list" id="scoreboardList"><div class="empty-scoreboard"><h4>No Data Yet</h4></div></ul></div></div>\
+                </div>\
+            </div>\
+        </div>\
+    </div>\
+\
+    <script>\
+        // This helper function is the bridge between the frontend (this file) and the backend (sheetAPI.js).\
+        async function callApi(action, params = \{\}) \{\
+            try \{\
+                // The URL '/api/sheetAPI' is a special shortcut handled by Netlify.\
+                const response = await fetch('/api/sheetAPI', \{\
+                    method: 'POST',\
+                    headers: \{ 'Content-Type': 'application/json' \},\
+                    body: JSON.stringify(\{ action, params \}),\
+                \});\
+                if (!response.ok) \{\
+                    const errorBody = await response.json();\
+                    throw new Error(errorBody.message || 'API request failed');\
+                \}\
+                return await response.json();\
+            \} catch (error) \{\
+                console.error(`API call for action "$\{action\}" failed:`, error);\
+                throw error;\
+            \}\
+        \}\
+\
+        class TaskTracker \{\
+            constructor() \{\
+                this.currentUser = null;\
+                this.startTime = null;\
+                this.isTaskStarted = false;\
+                this.selectedComments = [];\
+                this.commentOptions = [];\
+                this.timerInterval = null;\
+                this.isSubmitting = false;\
+                this.pendingRequests = \{ stats: false, scoreboard: false, reports: false \};\
+                this.debouncedReportsLoad = this.debounce(this.loadRecentEntries.bind(this), 300);\
+                this.init();\
+            \}\
+\
+            init() \{\
+                this.bindEvents();\
+                this.simulateUserLogin();\
+            \}\
+            \
+            // AUTHENTICATION REPLACEMENT: We hardcode a user here because we can't use Google Login on Netlify directly.\
+            simulateUserLogin() \{\
+                this.showScreen('loading');\
+                document.getElementById('loadingMessage').textContent = 'Initializing session...';\
+\
+                // --- !!! IMPORTANT: CHANGE THIS TO THE USER EMAIL YOU WANT TO USE FOR TESTING !!! ---\
+                this.currentUser = \{ email: 'test.user@example.com', role: 'User' \};\
+                // --------------------------------------------------------------------\
+\
+                this.handleSuccessfulUserLoad();\
+            \}\
+\
+            handleSuccessfulUserLoad() \{\
+                document.getElementById('userEmail').textContent = this.currentUser.email;\
+                document.getElementById('userRole').textContent = this.currentUser.role;\
+                setTimeout(() => \{\
+                    this.showScreen('main');\
+                    this.updateStats();\
+                    this.loadCommentOptions();\
+                    this.loadScoreboard();\
+                    setInterval(() => this.loadScoreboard(), 15000); // Refresh scoreboard every 15 seconds\
+                    this.showStatus("Application loaded successfully.", "info");\
+                \}, 500);\
+            \}\
+\
+            bindEvents() \{\
+                document.getElementById('startTimerBtn').addEventListener('click', () => this.startTask());\
+                document.getElementById('taskForm').addEventListener('submit', () => this.submitTask());\
+                document.getElementById('resetFormBtn').addEventListener('click', () => this.resetForm());\
+                document.getElementById('refreshAppBtn').addEventListener('click', () => location.reload());\
+                const commentsInput = document.getElementById('commentsInput');\
+                commentsInput.addEventListener('input', (e) => this.filterComments(e.target.value));\
+                commentsInput.addEventListener('focus', () => this.showCommentsDropdown());\
+                document.addEventListener('click', (e) => \{ if (!e.target.closest('.multi-select')) this.hideCommentsDropdown(); \});\
+                document.getElementById('youtubeLink').addEventListener('input', this.debouncedReportsLoad);\
+            \}\
+\
+            async loadCommentOptions() \{\
+                try \{\
+                    const comments = await callApi('getCommentOptions');\
+                    this.commentOptions = comments || [];\
+                    this.renderCommentsDropdown();\
+                \} catch (err) \{\
+                    this.showStatus('Could not load comments.', 'error');\
+                \}\
+            \}\
+\
+            async updateStats() \{\
+                if (this.pendingRequests.stats) return;\
+                this.pendingRequests.stats = true;\
+                try \{\
+                    const stats = await callApi('getTaskStats', \{ userEmail: this.currentUser.email \});\
+                    document.getElementById('todayCount').textContent = stats?.userTasks ?? '0';\
+                \} catch (err) \{\
+                    document.getElementById('todayCount').textContent = 'ERR';\
+                \} finally \{\
+                    this.pendingRequests.stats = false;\
+                \}\
+            \}\
+            \
+            async submitTask() \{\
+                if (!this.isTaskStarted || this.isSubmitting) return;\
+                const ytVideoLink = document.getElementById('youtubeLink').value.trim();\
+                const brandName = document.getElementById('brandName').value.trim();\
+                if (!ytVideoLink || !brandName || this.selectedComments.length === 0) \{\
+                    this.showStatus('Link, Brand Name, and Comment are required.', 'error');\
+                    document.getElementById('commentsValidation').classList.add('show');\
+                    return;\
+                \}\
+                this.isSubmitting = true;\
+                clearInterval(this.timerInterval);\
+                const endTime = new Date();\
+                const taskData = \{\
+                    ytVideoLink, brandName, userEmail: this.currentUser.email,\
+                    comments: this.selectedComments.join(', '),\
+                    screenshot: document.getElementById('screenshotLink').value.trim(),\
+                    startTime: this.formatTime(this.startTime), endTime: this.formatTime(endTime),\
+                    duration: this.calculateDuration(this.startTime, endTime),\
+                \};\
+\
+                const submitBtn = document.getElementById('submitBtn');\
+                submitBtn.innerHTML = 'Submitting...';\
+                submitBtn.disabled = true;\
+\
+                try \{\
+                    await callApi('submitTask', \{ taskData \});\
+                    this.showStatus('Task submitted successfully!', 'success');\
+                    this.resetForm();\
+                    await this.updateStats();\
+                    await this.loadScoreboard();\
+                \} catch (err) \{\
+                    this.showStatus('Server submission failed!', 'error');\
+                \} finally \{\
+                    this.isSubmitting = false;\
+                \}\
+            \}\
+\
+            async loadRecentEntries() \{\
+                const videoLink = document.getElementById('youtubeLink').value.trim();\
+                const reportContent = document.getElementById('reportContent');\
+                if (!videoLink || this.pendingRequests.reports) return;\
+                reportContent.innerHTML = '<p class="loading">Loading reports...</p>';\
+                this.pendingRequests.reports = true;\
+                try \{\
+                    const entries = await callApi('getRecentEntries', \{ videoLink \});\
+                    if (!entries || entries.length === 0) \{\
+                        reportContent.innerHTML = '<p class="info-text">No entries found for this video.</p>';\
+                        return;\
+                    \}\
+                    reportContent.innerHTML = entries.map(e => `\
+                        <div class="report-item">\
+                            <h5>$\{e.brandName || 'N/A'\}</h5>\
+                            <p><strong>User:</strong> $\{e.ldap || 'N/A'\}</p>\
+                            <p><strong>Comments:</strong> $\{e.comments || 'N/A'\}</p>\
+                            <p><strong>Date:</strong> $\{e.date || 'N/A'\}</p>\
+                        </div>`).join('');\
+                \} catch (err) \{\
+                    reportContent.innerHTML = '<p class="error">Error loading reports.</p>';\
+                \} finally \{\
+                    this.pendingRequests.reports = false;\
+                \}\
+            \}\
+\
+            async loadScoreboard() \{\
+                if (this.pendingRequests.scoreboard) return;\
+                this.pendingRequests.scoreboard = true;\
+                try \{\
+                    const scoreboardData = await callApi('getRealUsersScoreboard');\
+                    this.renderScoreboard(scoreboardData.sort((a, b) => b.tasksToday - a.tasksToday));\
+                \} catch (err) \{\
+                    console.error("Failed to load scoreboard", err);\
+                \} finally \{\
+                    this.pendingRequests.scoreboard = false;\
+                \}\
+            \}\
+\
+            renderScoreboard(data) \{\
+                const list = document.getElementById('scoreboardList');\
+                if (!data || data.length === 0) \{\
+                    list.innerHTML = '<div class="empty-scoreboard"><h4>No user data yet</h4></div>';\
+                    return;\
+                \}\
+                list.innerHTML = data.map((user, index) => \{\
+                    const rank = index + 1;\
+                    const rankClass = rank <= 3 ? `rank-$\{rank\}` : '';\
+                    return `\
+                        <li class="score-item">\
+                            <div class="score-rank $\{rankClass\}">$\{rank\}</div>\
+                            <div class="score-info">\
+                                <div class="score-user">$\{user.name || user.email\}</div>\
+                                <div class="score-meta">Last active: $\{user.lastActive ? new Date(user.lastActive).toLocaleTimeString() : 'N/A'\}</div>\
+                            </div>\
+                            <div class="score-count">$\{user.tasksToday\}</div>\
+                        </li>\
+                    `;\
+                \}).join('');\
+            \}\
+            \
+            debounce(func, wait) \{ let timeout; return function(...args) \{ clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), wait); \}; \}\
+            showScreen(type) \{ document.getElementById('loadingScreen').classList.toggle('hidden', type !== 'loading'); document.getElementById('mainContent').classList.toggle('hidden', type !== 'main'); \}\
+            startTask() \{ if (this.isTaskStarted) return; this.isTaskStarted = true; this.startTime = new Date(); this.toggleFormLock(false); const btn = document.getElementById('startTimerBtn'); btn.disabled = true; btn.innerHTML = 'Task Running...'; document.getElementById('timerDisplay').classList.add('running'); this.timerInterval = setInterval(() => \{ const duration = this.calculateDuration(this.startTime, new Date()); document.getElementById('timerDisplay').textContent = duration; document.getElementById('currentDuration').textContent = duration; \}, 1000); this.showStatus('Task started. Please fill in the details.', 'success'); \}\
+            resetForm() \{ if (this.timerInterval) clearInterval(this.timerInterval); this.isTaskStarted = false; this.startTime = null; this.selectedComments = []; this.isSubmitting = false; document.getElementById('taskForm').reset(); this.toggleFormLock(true); const startBtn = document.getElementById('startTimerBtn'); startBtn.disabled = false; startBtn.innerHTML = '\uc0\u9654  Start Task'; document.getElementById('submitBtn').innerHTML = 'Submit Task'; document.getElementById('timerDisplay').classList.remove('running'); document.getElementById('timerDisplay').textContent = '00:00:00'; document.getElementById('currentDuration').textContent = '00:00:00'; this.updateSelectedCommentsUI(); document.getElementById('reportContent').innerHTML = '<p class="info-text">Enter a YouTube link to see reports...</p>'; this.updateVideoPlayer(''); this.showStatus('Form has been reset.', 'info'); \}\
+            toggleFormLock(locked) \{ ['youtubeLink', 'commentsInput', 'screenshotLink', 'brandName', 'submitBtn'].forEach(id => document.getElementById(id).disabled = locked); \}\
+            showStatus(message, type) \{ const div = document.getElementById('statusDisplay'); div.textContent = message; div.className = `status-display status-$\{type\}`; div.style.display = 'block'; if (type !== 'error') setTimeout(() => div.style.display = 'none', 5000); \}\
+            filterComments(searchText) \{ this.renderCommentsDropdown(this.commentOptions.filter(c => c.toLowerCase().includes(searchText.toLowerCase()))); this.showCommentsDropdown(); \}\
+            renderCommentsDropdown(options) \{ const dropdown = document.getElementById('commentsDropdown'); dropdown.innerHTML = (options && options.length) ? options.map(o => `<div class="multi-select-option" data-value="$\{o\}">$\{o\}</div>`).join('') : '<div style="padding:10px;">No results</div>'; dropdown.querySelectorAll('.multi-select-option').forEach(opt => opt.addEventListener('click', e => \{ this.toggleCommentSelection(e.target.dataset.value); this.hideCommentsDropdown(); \})); \}\
+            toggleCommentSelection(comment) \{ const index = this.selectedComments.indexOf(comment); if (index > -1) this.selectedComments.splice(index, 1); else this.selectedComments.push(comment); this.updateSelectedCommentsUI(); document.getElementById('commentsValidation').classList.remove('show'); \}\
+            updateSelectedCommentsUI() \{ document.getElementById('selectedComments').innerHTML = this.selectedComments.map(c => `<span class="tag">$\{c\} <span class="remove" data-comment="$\{c\}">\'d7</span></span>`).join(''); document.querySelectorAll('#selectedComments .remove').forEach(btn => btn.addEventListener('click', e => this.toggleCommentSelection(e.target.dataset.comment))); \}\
+            showCommentsDropdown() \{ if (!document.getElementById('commentsInput').disabled) document.getElementById('commentsDropdown').classList.add('show'); \}\
+            hideCommentsDropdown() \{ document.getElementById('commentsDropdown').classList.remove('show'); \}\
+            updateVideoPlayer(url) \{ const videoId = (url.match(/(?:[?&]v=|\\/embed\\/|youtu\\.be\\/)([^"&?\\/ ]\{11\})/) || [])[1]; const card = document.getElementById('videoPreviewCard'); const player = document.getElementById('videoPreview'); if (videoId) \{ player.src = `https://www.youtube.com/embed/$\{videoId\}`; card.classList.remove('hidden'); \} else \{ player.src = ''; card.classList.add('hidden'); \} \}\
+            formatTime(date) \{ return date.toLocaleTimeString('en-US', \{ hour12: false \}); \}\
+            calculateDuration(start, end) \{ const diff = Math.max(0, end - start); const h = Math.floor(diff / 36e5); const m = Math.floor((diff % 36e5) / 6e4); const s = Math.floor((diff % 6e4) / 1000); return [h, m, s].map(v => String(v).padStart(2, '0')).join(':'); \}\
+        \}\
+\
+        document.addEventListener('DOMContentLoaded', () => \{ window.app = new TaskTracker(); \});\
+    </script>\
+</body>\
+</html>}
