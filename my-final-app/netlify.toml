@@ -1,0 +1,6 @@
+# This is the configuration file for Netlify.
+[build]
+  # This tells Netlify where your website files are.
+  publish = "public"
+  # This tells Netlify where your backend code is.
+  functions = "netlify/functions"
