@@ -1,0 +1,15 @@
+# This is the complete configuration for your site.
+# This file will now control everything.
+
+[build]
+  # This tells Netlify where your website files are.
+  publish = "public"
+  # This tells Netlify where your backend code is.
+  functions = "netlify/functions"
+
+# This is the crucial "connecting door".
+# It tells Netlify that any request to "/api/..." should be sent to your backend function.
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
